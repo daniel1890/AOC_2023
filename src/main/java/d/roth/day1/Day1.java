@@ -3,13 +3,14 @@ package d.roth.day1;
 import d.roth.Day;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.*;
 
 public class Day1 extends Day {
     private ArrayList<String> numberStrings = new ArrayList<String>() {{ add("one"); add("two"); add("three"); add("four"); add("five"); add("six");add("seven"); add("eight"); add("nine");}};
     private Map<String, Integer> numberStringsMap = Map.of(numberStrings.get(0), 1, numberStrings.get(1), 2, numberStrings.get(2), 3, numberStrings.get(3), 4, numberStrings.get(4), 5, numberStrings.get(5), 6, numberStrings.get(6), 7, numberStrings.get(7), 8, numberStrings.get(8), 9);
 
-    public Day1(int dayNumber, String fileName) throws FileNotFoundException {
+    public Day1(int dayNumber, String fileName) throws IOException {
         super(dayNumber, fileName);
     }
 

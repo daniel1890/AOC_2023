@@ -2,11 +2,11 @@ package d.roth.day2;
 
 import d.roth.Day;
 
-import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Day2 extends Day {
 
-    public Day2(int dayNumber, String fileName) throws FileNotFoundException {
+    public Day2(int dayNumber, String fileName) throws IOException {
         super(dayNumber, fileName);
     }
 
