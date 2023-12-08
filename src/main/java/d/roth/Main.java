@@ -9,6 +9,6 @@ public class Main {
         Day1 day1 = new Day1();
 
         System.out.println(day1.calcPartOne());
-
+        System.out.println(day1.calcPartTwo());
     }
 }
