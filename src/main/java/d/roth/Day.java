@@ -8,12 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Day {
-    private BufferedReader reader;
+    private final BufferedReader reader;
     protected List<String> input;
     protected int dayNumber;
+    protected String userHome = System.getProperty("user.home");
 
     public Day(int dayNumber, String fileName) throws FileNotFoundException {
-        reader = new BufferedReader(new FileReader(fileName));
+        reader = new BufferedReader(new FileReader(userHome + fileName));
         this.input = new ArrayList<>();
         this.readFile();
         this.dayNumber = dayNumber;
