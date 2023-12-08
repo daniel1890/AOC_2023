@@ -14,7 +14,12 @@ public abstract class Day {
     protected String userHome = System.getProperty("user.home");
 
     public Day(int dayNumber, String fileName) throws FileNotFoundException {
-        reader = new BufferedReader(new FileReader(userHome + fileName));
+        try {
+            reader = new BufferedReader(new FileReader(userHome + fileName));
+        } catch (FileNotFoundException e) {
+            throw new FileNotFoundException(e.getMessage());
+        }
+
         this.input = new ArrayList<>();
         this.readFile();
         this.dayNumber = dayNumber;
