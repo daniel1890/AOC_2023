@@ -1,38 +1,16 @@
 package d.roth.day1;
 
-import java.io.BufferedReader;
+import d.roth.Day;
+
 import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.*;
 
-import static java.util.Arrays.stream;
-
-public class Day1 {
-    private BufferedReader reader;
-    private List<String> input;
+public class Day1 extends Day {
     private ArrayList<String> numberStrings = new ArrayList<String>() {{ add("one"); add("two"); add("three"); add("four"); add("five"); add("six");add("seven"); add("eight"); add("nine");}};
     Map<String, Integer> numberStringsMap = Map.of(numberStrings.get(0), 1, numberStrings.get(1), 2, numberStrings.get(2), 3, numberStrings.get(3), 4, numberStrings.get(4), 5, numberStrings.get(5), 6, numberStrings.get(6), 7, numberStrings.get(7), 8, numberStrings.get(8), 9);
 
-    Integer ansPartOne;
-
-    public Day1() throws FileNotFoundException {
-        reader = new BufferedReader(new FileReader("C:/Users/danie/IdeaProjects/AOC2023/AOC_2023/src/main/resources/day1.txt"));
-        this.input = new ArrayList<>();
-        this.readFile();
-    }
-
-    private void readFile() {
-        try {
-            String line = reader.readLine();
-
-            while (line != null) {
-                input.add(line);
-                line = reader.readLine();
-            }
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-        }
+    public Day1(int dayNumber, String fileName) throws FileNotFoundException {
+        super(dayNumber, fileName);
     }
 
     public int calcPartOne() {
@@ -56,16 +34,15 @@ public class Day1 {
     }
 
     public int calcPartTwo() {
-
         return input.stream().map(
                 (String line) -> {
                     int[] resultArr = new int[2];
 
                     String numberStringFront = "";
-                    boolean numberStringFrontIsTrue = false;
-                    boolean numberFrontIsTrue = false;
+                    boolean numberStringFrontIsTrue;
+                    boolean numberFrontIsTrue;
 
-                    for(int i = 0; i < line.length() || numberStringFrontIsTrue || numberFrontIsTrue; i++) {
+                    for(int i = 0; i < line.length(); i++) {
                         numberStringFront += line.substring(i, i + 1);
 
                         String finalNumberString = numberStringFront;
@@ -73,43 +50,48 @@ public class Day1 {
                         numberFrontIsTrue = Character.isDigit(line.charAt(i));
 
                         if(numberStringFrontIsTrue) {
+                            int x = findNumberString(finalNumberString);
+                            resultArr[0] = x;
 
-
-                            resultArr[0] = numberStringsMap.get(finalNumberString);
+                            break;
                         } else if (numberFrontIsTrue) {
                             resultArr[0] = Character.getNumericValue(line.charAt(i));
+
+                            break;
                         }
                     }
 
-                    StringBuilder buf = new StringBuilder(String.valueOf(line));
+                    StringBuilder buf = new StringBuilder(line);
                     buf.reverse();
                     String revertedLine = buf.toString();
 
                     String numberStringBack = "";
-                    boolean numberStringBackIsTrue = false;
-                    boolean numberBackIsTrue = false;
+                    boolean numberStringBackIsTrue;
+                    boolean numberBackIsTrue;
 
-                    for(int i = 0; i < revertedLine.length() || numberStringBackIsTrue || numberBackIsTrue; i++) {
-                        numberStringBack += revertedLine.substring(i, i +  1);
+                    for(int i = 0; i < revertedLine.length(); i++) {
+                        numberStringBack = revertedLine.substring(i, i + 1) + numberStringBack;
 
                         String finalNumberString = numberStringBack;
                         numberStringBackIsTrue = numberStrings.stream().anyMatch(keyword -> finalNumberString.contains(keyword));
                         numberBackIsTrue = Character.isDigit(revertedLine.charAt(i));
 
                         if(numberStringBackIsTrue) {
-                            resultArr[1] = numberStringsMap.get(finalNumberString);
+                            int x = findNumberString(finalNumberString);
+                            resultArr[1] = x;
+
+                            break;
                         } else if (numberBackIsTrue) {
-                            resultArr[1] = Character.getNumericValue(line.charAt(i));
+                            resultArr[1] = Integer.parseInt(finalNumberString.substring(0, 1));
+
+                            break;
                         }
                     }
 
                     String appendedResult = resultArr[0] + "" + resultArr[1];
 
-                    System.out.println(appendedResult);
-
                     return Integer.parseInt(appendedResult);
-                }
-                ).mapToInt(Integer::intValue).sum();
+                }).mapToInt(Integer::intValue).sum();
     }
 
     private int findNumberString(String line) {

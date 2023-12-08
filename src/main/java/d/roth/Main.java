@@ -6,9 +6,7 @@ import java.io.FileNotFoundException;
 
 public class Main {
     public static void main(String[] args) throws FileNotFoundException {
-        Day1 day1 = new Day1();
-
-        System.out.println(day1.calcPartOne());
-        System.out.println(day1.calcPartTwo());
+        Day1 day1 = new Day1(1, "C:/Users/danie/IdeaProjects/AOC_2023/src/main/resources/day1.txt");
+        day1.startDay();
     }
 }
