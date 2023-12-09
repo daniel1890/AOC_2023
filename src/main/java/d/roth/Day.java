@@ -18,8 +18,8 @@ public abstract class Day {
 
     public void startDay() {
         System.out.println("/*------Day " + dayNumber + ":");
-        System.out.println("Ans part 1: " + this.calcPartTwo());
-        System.out.println("Ans part 2: " + this.calcPartOne());
+        System.out.println("Ans part 1: " + this.calcPartOne());
+        System.out.println("Ans part 2: " + this.calcPartTwo());
     }
 
     protected abstract int calcPartOne();
