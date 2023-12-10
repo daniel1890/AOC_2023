@@ -4,7 +4,9 @@ import d.roth.Day;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Day4 extends Day {
@@ -28,23 +30,45 @@ public class Day4 extends Day {
 
     @Override
     protected int calcPartTwo() {
+        AtomicInteger gameIndex = new AtomicInteger();
+
+        // setup hashmap for each game where start value of each game is 1
+        Map<Integer, Integer> gameIdCopies  = new HashMap<>();
+        for (int i = 1; i <= input.size() ; i++) {
+            gameIdCopies.put(i, 1);
+        }
+
         return input.stream().map(
                 (String line) -> {
                     String[] gameParts = line.split("\\|");
 
                     // create new game with parsed game values
-                    Game game = new Game(gameParts);
+                    int j = gameIndex.incrementAndGet();
 
-                    return game.getResults();
+                    // create a new game according to value mapped to game id
+                    for(int i = 0; i < gameIdCopies.get(j) ; i++) {
+                        Game game = new Game(gameParts);
+                        int nextGameCopies = game.getNextNumberCopies();
+
+                        // add to game hash table where necessary
+                        for (int k = 0; k < nextGameCopies ; k++) {
+                            int nextGameKey = j + k + 1;
+                            int oldResult = gameIdCopies.get(nextGameKey);
+
+                            gameIdCopies.put(nextGameKey, oldResult + 1);
+                        }
+                    }
+
+                    return gameIdCopies.get(j);
                 }).mapToInt(Integer::intValue).sum();
     }
 
     static class Game {
-        public static int[] copiesPerGame = new int[]{};
         private final List<Integer> winningNumbers;
         private final List<Integer> actualNumbers;
         private final int gameID;
         private final int gamePoints;
+        private final int nextGameCopies;
 
         public Game(String[] gameParts) {
             // parse winning numbers, actual numbers and game id
@@ -53,6 +77,7 @@ public class Day4 extends Day {
             this.gameID = Integer.parseInt(Arrays.stream(gameParts[0].split(":")[0].trim().split(" ")).filter(s -> !s.isEmpty()).toList().get(1));
 
             this.gamePoints = getResults();
+            this.nextGameCopies = getNumberCopies();
         }
 
         public int getResults() {
@@ -73,10 +98,22 @@ public class Day4 extends Day {
             return result.get();
         }
 
-        public int getCopiesPerGameID() {
+        public int getNumberCopies() {
+            AtomicInteger result = new AtomicInteger();
 
+            actualNumbers.forEach(
+                    actualResult -> {
+                        if(winningNumbers.contains(actualResult)) {
+                            result.incrementAndGet();
+                        }
+                    }
+            );
 
-            return 0;
+            return result.get();
+        }
+
+        public int getNextNumberCopies() {
+            return this.nextGameCopies;
         }
     }
 }
