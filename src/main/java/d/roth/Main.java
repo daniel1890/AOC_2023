@@ -2,6 +2,7 @@ package d.roth;
 
 import d.roth.day1.Day1;
 import d.roth.day2.Day2;
+import d.roth.day3.Day3;
 
 import java.io.IOException;
 
@@ -12,5 +13,9 @@ public class Main {
 
         Day2 day2 = new Day2(2, "/IdeaProjects/AOC2023/AOC_2023/src/main/resources/day2.txt");
         day2.startDay();
+
+        Day3 day3 = new Day3(3, "/IdeaProjects/AOC2023/AOC_2023/src/main/resources/day3.txt");
+        day3.startDay();
+
     }
 }
