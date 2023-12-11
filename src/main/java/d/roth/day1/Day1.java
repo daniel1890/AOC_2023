@@ -2,7 +2,6 @@ package d.roth.day1;
 
 import d.roth.Day;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 

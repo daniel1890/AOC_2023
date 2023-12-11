@@ -3,10 +3,7 @@ package d.roth.day4;
 import d.roth.Day;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Day4 extends Day {
@@ -38,11 +35,12 @@ public class Day4 extends Day {
             gameIdCopies.put(i, 1);
         }
 
+        // need to refactor so no side effects in map function
         return input.stream().map(
                 (String line) -> {
                     String[] gameParts = line.split("\\|");
 
-                    // create new game with parsed game values
+                    // get current gameID which is getting looped through
                     int j = gameIndex.incrementAndGet();
 
                     // create a new game according to value mapped to game id

@@ -5,6 +5,7 @@ import d.roth.helper.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.OptionalInt;
 
 public abstract class Day {
     protected List<String> input;

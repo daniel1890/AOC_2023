@@ -4,6 +4,7 @@ import d.roth.Day;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.OptionalInt;
 
 public class Day2 extends Day {
 
