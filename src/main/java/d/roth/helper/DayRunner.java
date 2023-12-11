@@ -24,7 +24,7 @@ public class DayRunner {
         //this.dayList.add(new Day2(2, "/IdeaProjects/AOC2023/AOC_2023/src/main/resources/day2.txt"));
         //this.dayList.add(new Day3(3, "/IdeaProjects/AOC2023/AOC_2023/src/main/resources/day3.txt"));
         //this.dayList.add(new Day4(4, "/IdeaProjects/AOC2023/AOC_2023/src/main/resources/day4.txt"));
-        this.dayList.add(new Day5(5, "/IdeaProjects/AOC2023/AOC_2023/src/main/resources/day5test.txt"));
+        this.dayList.add(new Day5(5, "/IdeaProjects/AOC_2023/src/main/resources/day5test.txt"));
     }
 
     public void runDays() {
